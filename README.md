@@ -1,7 +1,7 @@
 # CSC 413 - Project Two - The Interpreter
 
-## Student Name  : Name here
+## Student Name  : Greesan Gurumurthy
 
-## Student ID    : ID here
+## Student ID    : 918737305
 
-## Student Email : Email here
+## Student Email : ggurumurthy@mail.sfsu.edu
