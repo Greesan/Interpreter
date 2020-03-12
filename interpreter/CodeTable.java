@@ -9,7 +9,7 @@ package interpreter;
 import java.util.HashMap;
 
 public class CodeTable {
-    
+    //StoreByteCode:1st arg: int, 2nd arg: String
     private static HashMap<String,String> codeTable;
     
     private CodeTable(){}
