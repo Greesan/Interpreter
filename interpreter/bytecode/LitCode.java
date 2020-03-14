@@ -12,7 +12,7 @@ public class LitCode extends ByteCode
 
     @Override
     public void execute(VirtualMachine vm) {
-        if(vm.isDumping())
+        if(vm.isDump)
         {
             toString();
         }

@@ -16,8 +16,19 @@ public class RunTimeStack {
         framePointer.add(0);
     }
 
-    public void dump(){
-
+    public void dump() {
+        int i = 0;
+        int fppointer = 0;
+        while (i < runTimeStack.size()) {
+            int fpbarrier = framePointer.get(fppointer);
+            System.out.print(" [");
+            while (i < fpbarrier) {
+                System.out.print(runTimeStack.get(i) + " ");
+                i++;
+            }
+            System.out.print("]");
+            fppointer++;
+        }
     }
     public int peek(){
         return runTimeStack.get(runTimeStack.size()-1);
@@ -36,7 +47,16 @@ public class RunTimeStack {
 
     public int store(int offset)
     {
-        if(framePointer.peek()+offset <= runTimeStack.size()) {
+        if(framePointer.peek()+offset<runTimeStack.size()-1) {
+            runTimeStack.add(framePointer.peek() + offset, pop());
+            return framePointer.get(framePointer.peek() + offset);
+        }
+        return -1;
+    }
+
+    public int load(int offset)
+    {
+        if(framePointer.peek()+offset <= runTimeStack.size()-1) {
             runTimeStack.add(runTimeStack.get(framePointer.peek()+offset));
             runTimeStack.remove(offset);
             return runTimeStack.get(offset);
@@ -44,18 +64,18 @@ public class RunTimeStack {
         return -1;
     }
 
-    public int load(int offset)
-    {
-        framePointer.add(runTimeStack.size() - 1 - offset);
-    }
-
     public void newFrameAt(int offset)
     {
-
+        if(offset < runTimeStack.size()-1)
+            framePointer.push(runTimeStack.size()-1-offset);
     }
 
     public void popFrame()
     {
-
+        while(runTimeStack.size()>framePointer.peek())
+        {
+            pop();
+        }
+        framePointer.pop();
     }
 }

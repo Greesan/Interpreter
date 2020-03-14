@@ -7,8 +7,10 @@ import java.util.ArrayList;
 public class ArgsCode extends ByteCode {
     private int argsize;
     @Override
-    public void execute(VirtualMachine wm) {
-
+    public void execute(VirtualMachine vm) {
+        vm.runTimeStack.newFrameAt(0);
+        if(vm.isDump)
+            System.out.println(this);
     }
 
     @Override
@@ -17,6 +19,7 @@ public class ArgsCode extends ByteCode {
         if(args != null && args.size() == 2) {
             codeType = args.get(0);
             argsize = Integer.parseInt(args.get(1));
+            dumpable = true;
         }
     }
 

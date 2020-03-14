@@ -39,11 +39,18 @@ public class ByteCodeLoader extends Object {
      *      Parse any additional arguments for the given ByteCode and send them to
      *      the newly created ByteCode instance via the init function.
      */
-    public Program loadCodes() throws IOException {
+    public Program loadCodes() {
         Program interpreter = new Program();
-        if (this.byteSource.readLine() == null)
-            return null;
-        String line = this.byteSource.readLine();
+        String line = null;
+        try
+        {
+            if (this.byteSource.readLine() == null)
+                return null;
+            line = this.byteSource.readLine();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         while(line != null) {
             String[] tokens = line.split(" ");
             ArrayList<String> args = new ArrayList<String>();
@@ -62,8 +69,13 @@ public class ByteCodeLoader extends Object {
                     InstantiationException | InvocationTargetException e)
             {
                 e.printStackTrace();
+                System.exit(0);
             }
-            line = this.byteSource.readLine();
+            try {
+                line = this.byteSource.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         interpreter.resolveAddress();
         return interpreter;

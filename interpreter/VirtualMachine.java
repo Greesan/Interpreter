@@ -6,12 +6,12 @@ import java.util.Stack;
 
 public class VirtualMachine {
 
-    private RunTimeStack   runTimeStack;
+    public RunTimeStack   runTimeStack;
     private Stack<Integer> returnAddress;
     private Program        program;
     private int            programCounter;
     private boolean        isRunning;
-    private boolean        isDump;
+    public boolean        isDump;
 
     protected VirtualMachine(Program program) {
         this.program = program;
@@ -34,5 +34,21 @@ public class VirtualMachine {
             programCounter++;
         }
     }
+
+    public void pop_req()
+    {
+        runTimeStack.pop();
+    }
+
+    public void push_req(int val)
+    {
+        runTimeStack.push(val);
+    }
+
+
+
+
+
+
 
 }

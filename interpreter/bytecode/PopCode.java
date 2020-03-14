@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class PopCode extends ByteCode {
     int numpop;
     @Override
-    public void execute(VirtualMachine wm) {
-
+    public void execute(VirtualMachine vm) {
+        vm.pop_req();
     }
 
     @Override
